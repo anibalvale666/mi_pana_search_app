@@ -1,0 +1,21 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+.search-container {
+    padding: 10%;
+    
+}
+
+.search-box {
+    text-align: center;
+    margin: 0px auto;
+    border: 5px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    padding: 5%;
+}
+
+.search-response-box {
+   margin-top: 50px;
+}
