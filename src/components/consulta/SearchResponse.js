@@ -3,7 +3,7 @@ import React from 'react'
 export const SearchResponse = () => {
     return (
         <div>
-            <div className="search-response-box">
+            <div className="search-response-box box">
                 <h3>Toyota Corolla</h3>
                 <h4>Aceite:</h4>
                 <table class="table">
@@ -11,7 +11,7 @@ export const SearchResponse = () => {
                         <tr>
                             <th scope="col">Aceite</th>
                             <th scope="col">Grado</th>
-                            <th scope="col">Fecha ultimo cambio</th>
+                            <th scope="col">Fecha de cambio</th>
                             <th scope="col">Kilometraje</th>
                         </tr>
                     </thead>
@@ -30,7 +30,6 @@ export const SearchResponse = () => {
                             <td>75000</td>
                         </tr>
 
- 
                     </tbody>
                 </table>
             </div>

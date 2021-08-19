@@ -2,11 +2,11 @@
     padding: 0px;
     margin: 0px;
 }
-.search-container {
+.register-container {
     padding: 10%;
 }
 
-.search-box {
+.register-box {
     text-align: center;
     margin: 0px auto;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
@@ -15,10 +15,8 @@
     padding: 5%;
 }
 
-.search-response-box {
-    margin-top: 50px;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
-
-    padding: 20px;
+.btnSubmit{
+    margin: 15px;
+    color: #fff;
+    background-color: #0062cc;
 }
