@@ -6,7 +6,7 @@ export const SearchResponse = () => {
             <div className="search-response-box box">
                 <h3>Toyota Corolla</h3>
                 <h4>Aceite:</h4>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                             <th scope="col">Aceite</th>

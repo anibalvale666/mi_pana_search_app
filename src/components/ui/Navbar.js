@@ -1,18 +1,50 @@
 import React from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 export const Navbar = () => {
     return (
-        <div className="navbar navbar-dark bg-dark mb-4">
+        <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 
-        <span className="navbar-brand">
+        <Link className="navbar-brand" to="/">
             MiPana
-        </span>
+        </Link>
+        <div className="navbar-collapse">
+            
+                <div className="navbar-nav">
 
-            <button className="btn btn-outline-success ">
-                <span>
-                    Login
-                </span>
-            </button>
-        </div>
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/search"
+                    >
+                        Busquedad
+                    </NavLink>
+
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/register"
+                    >
+                        Registro
+                    </NavLink>
+                </div>
+            </div>
+
+
+        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul className="navbar-nav ml-auto">
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/login"
+                    >
+                        Login
+                    </NavLink>
+                </ul>
+            </div>
+        </nav>
     )
 }
