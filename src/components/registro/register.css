@@ -20,3 +20,14 @@
     color: #fff;
     background-color: #0062cc;
 }
+
+
+/*Datepicker*/
+
+.react-date-picker input:focus {
+    outline: none;
+}
+
+.react-date-picker__wrapper {
+    border: 0px solid gray !important;
+}

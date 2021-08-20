@@ -16,11 +16,11 @@ export const useForm = (initialState = {}) => {
     if (key) {
         // if you have nested keys to update
         setValues({
-        ...values,
-        [section]: {
-            ...values[section],
-            [key]: target.value
-        }
+          ...values,
+          [section]: {
+              ...values[section],
+              [key]: target.value
+          }
         });
     } else {
         // if you're updating on the first level

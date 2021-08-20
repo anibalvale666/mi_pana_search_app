@@ -1,19 +1,27 @@
-import React from 'react'
+import React,{ useState } from 'react'
 import { useForm } from '../../hooks/useForm'
-import './register.css'
+import DatePicker from 'react-date-picker';
+import './register.css';
+
+
 export const RegisterScreen = () => {
+
+    const [fechaAceiteMotor, setFechaAceiteMotor] = useState(new Date());
+    const [fechaAceiteCaja, setFechaAceiteCaja] = useState(new Date());
+    const [fechaRefrigerante, setFechaRefrigerante] = useState(new Date());
+
     
-    const [ formValues, handleInputchange ] = useForm( {
+    const [ formValues, handleInputChange ] = useForm( {
         placa: '',
         marca: '',
         aceite_motor: {
             aceite: '',
-            fecha: '',
+            fecha: new Date(),
             km: ''
         },
         aceite_caja: {
             aceite: '',
-            fecha: '',
+            fecha: new Date(),
             km: ''
         },
         filtros:{
@@ -24,7 +32,7 @@ export const RegisterScreen = () => {
         },
         liquido_radiador: {
             liquido: '',
-            fecha: '',
+            fecha: new Date(),
             km: ''
         },
         obs: ''
@@ -38,8 +46,37 @@ export const RegisterScreen = () => {
         console.log(formValues);
     } 
 
-
+    const handleInputDateAceiteMotor = (e) => {
+        setFechaAceiteMotor(e);
+        handleInputChange({
+            target:{
+                name: "aceite_motor.fecha",
+                value: e
+            }
+        })
+    }
     
+    const handleInputDateAceiteCaja = (e) => {
+        setFechaAceiteCaja(e);
+        handleInputChange({
+            target:{
+                name: "aceite_caja.fecha",
+                value: e
+            }
+        })
+    }
+
+    const handleInputDateRefrigerante = (e) => {
+        setFechaRefrigerante(e);
+        handleInputChange({
+            target:{
+                name: "liquido_radiador.fecha",
+                value: e
+            }
+        })
+    }
+
+
     return (
         <div className="register-container">
             <div className="register-box">
@@ -54,7 +91,7 @@ export const RegisterScreen = () => {
                                 autoComplete="off" 
                                 maxLength="6"
                                 value={placa}
-                                onChange={handleInputchange}        
+                                onChange={handleInputChange}        
                             />
                     </div>
                     <div className="form-group">
@@ -65,7 +102,7 @@ export const RegisterScreen = () => {
                             name="marca"
                             autoComplete="off" 
                             value={marca}
-                            onChange={handleInputchange}  
+                            onChange={handleInputChange}  
                         />
                     </div>
 
@@ -84,20 +121,16 @@ export const RegisterScreen = () => {
                                     name="aceite_motor.aceite"
                                     autoComplete="off" 
                                     value={aceite_motor.aceite}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
                         <div className="col" >
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Fecha motor"
-                                    name="aceite_motor.fecha"
-                                    autoComplete="off" 
-                                    value={aceite_motor.fecha}
-                                    onChange={handleInputchange}  
+                                     <DatePicker
+                                        onChange={handleInputDateAceiteMotor}
+                                        value={fechaAceiteMotor}
+                                        className="form-control"
                                     />
                             </div>
                         </div>
@@ -110,7 +143,7 @@ export const RegisterScreen = () => {
                                     name="aceite_motor.km"
                                     autoComplete="off" 
                                     value={aceite_motor.km}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -133,21 +166,17 @@ export const RegisterScreen = () => {
                                     name="aceite_caja.aceite"
                                     autoComplete="off" 
                                     value={aceite_caja.aceite}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
                         <div className="col" >
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Fecha caja"
-                                    name="aceite_caja.fecha"
-                                    autoComplete="off" 
-                                    value={aceite_caja.fecha}
-                                    onChange={handleInputchange}  
-                                    />
+                                        <DatePicker
+                                            onChange={handleInputDateAceiteCaja}
+                                            value={fechaAceiteCaja}
+                                            className="form-control"
+                                        />
                             </div>
                         </div>
                         <div className="col" >
@@ -159,7 +188,7 @@ export const RegisterScreen = () => {
                                     name="aceite_caja.km"
                                     autoComplete="off" 
                                     value={aceite_caja.km}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -179,7 +208,7 @@ export const RegisterScreen = () => {
                                     name="filtros.aceite"
                                     autoComplete="off" 
                                     value={filtros.aceite}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -192,7 +221,7 @@ export const RegisterScreen = () => {
                                     name="filtros.aire"
                                     autoComplete="off" 
                                     value={filtros.aire}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -205,7 +234,7 @@ export const RegisterScreen = () => {
                                     name="filtros.combustible"
                                     autoComplete="off" 
                                     value={filtros.combustible}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -218,7 +247,7 @@ export const RegisterScreen = () => {
                                     name="filtros.cabina"
                                     autoComplete="off" 
                                     value={filtros.cabina}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -239,23 +268,19 @@ export const RegisterScreen = () => {
                                     name="liquido_radiador.liquido"
                                     autoComplete="off" 
                                     value={liquido_radiador.liquido}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     
                                     />
                             </div>
                         </div>
                         <div className="col" >
                             <div className="form-group">
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    placeholder="Fecha radiador"
-                                    name="liquido_radiador.fecha"
-                                    autoComplete="off" 
-                                    value={liquido_radiador.fecha}
-                                    onChange={handleInputchange}  
-                                    />
-                            </div>
+                                        <DatePicker
+                                            onChange={handleInputDateRefrigerante}
+                                            value={fechaRefrigerante}
+                                            className="form-control"
+                                        />
+                                </div>
                         </div>
                         <div className="col" >
                             <div className="form-group">
@@ -266,7 +291,7 @@ export const RegisterScreen = () => {
                                     name="liquido_radiador.km"
                                     autoComplete="off" 
                                     value={liquido_radiador.km}
-                                    onChange={handleInputchange}  
+                                    onChange={handleInputChange}  
                                     />
                             </div>
                         </div>
@@ -280,7 +305,7 @@ export const RegisterScreen = () => {
                             name="obs"
                             autoComplete="off" 
                             value={obs}
-                            onChange={handleInputchange}  
+                            onChange={handleInputChange}  
                         />
 
                     <div className="form-group">
