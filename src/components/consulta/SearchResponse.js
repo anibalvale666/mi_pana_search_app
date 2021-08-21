@@ -1,10 +1,15 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 export const SearchResponse = () => {
+    
+    const {searchData:{marca, aceite_motor, aceite_caja, filtros, liquido_radiador, obs}} = useSelector(state => state.data);
+    
+    // const {marca, aceite_motor, aceite_caja, filtros, liquido_radiador, obs} = searchData;    
     return (
         <div>
             <div className="search-response-box box">
-                <h3>Toyota Corolla</h3>
+                <h3> {marca} </h3>
                 <h4>Aceite:</h4>
                 <table className="table">
                     <thead>
@@ -17,17 +22,17 @@ export const SearchResponse = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Motul</td>
+                            <td>{aceite_motor.aceite}</td>
 
-                            <td>28/9/21</td>
-                            <td>79000</td>
+                            <td>{aceite_motor.fecha.toLocaleDateString("en-US")}</td>
+                            <td>{aceite_motor.km}</td>
                         </tr>
                         <tr>
 
-                            <td>Mannol</td>
+                            <td>{aceite_caja.aceite}</td>
 
-                            <td>5/10/21</td>
-                            <td>75000</td>
+                            <td>{aceite_caja.fecha.toLocaleDateString("en-US")}</td>
+                            <td>{aceite_caja.km}</td>
                         </tr>
 
                     </tbody>
@@ -47,10 +52,10 @@ export const SearchResponse = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Lf-9</td>
-                            <td>Afl23</td>
-                            <td>OL23</td>
-                            <td>ffglw</td>
+                            <td>{filtros.aceite}</td>
+                            <td>{filtros.aire}</td>
+                            <td>{filtros.combustible}</td>
+                            <td>{filtros.cabina}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,16 +71,16 @@ export const SearchResponse = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>vistony verde</td>
-                            <td>8/9/21</td>
-                            <td>75000</td>
+                            <td>{liquido_radiador.liquido}</td>
+                            <td>{liquido_radiador.fecha.toLocaleDateString("en-US")}</td>
+                            <td>{liquido_radiador.km}</td>
     
                         </tr>
                     </tbody>
                 </table>
 
             <h4>Observaciones:</h4>
-                <p>Hola</p>
+                <p>{obs}</p>
 
             </div>
         </div>

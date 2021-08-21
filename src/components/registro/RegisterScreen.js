@@ -2,13 +2,22 @@ import React,{ useState } from 'react'
 import { useForm } from '../../hooks/useForm'
 import DatePicker from 'react-date-picker';
 import './register.css';
+import { Navbar } from '../ui/Navbar';
+import { useDispatch } from 'react-redux';
+import { dataAddNew } from '../../actions/data';
 
 
 export const RegisterScreen = () => {
 
+    const dispatch = useDispatch();
+
+
     const [fechaAceiteMotor, setFechaAceiteMotor] = useState(new Date());
     const [fechaAceiteCaja, setFechaAceiteCaja] = useState(new Date());
     const [fechaRefrigerante, setFechaRefrigerante] = useState(new Date());
+
+    const [placaValid, setPlacaValid] = useState(true);
+    const [marcaValid, setMarcaValid] = useState(true);
 
     
     const [ formValues, handleInputChange ] = useForm( {
@@ -44,6 +53,26 @@ export const RegisterScreen = () => {
     const handleSubmit = (e) =>{
         e.preventDefault();
         console.log(formValues);
+
+        if(placa.trim().length !== 6)
+        {
+            return setPlacaValid(false);
+        }
+        setPlacaValid(true);
+        
+        if(marca.trim().length === 0)
+        {
+            return setMarcaValid(false);
+        }
+        setMarcaValid(true);
+
+        dispatch(dataAddNew({
+            ...formValues,
+            id: new Date().getTime()
+        }))
+
+
+
     } 
 
     const handleInputDateAceiteMotor = (e) => {
@@ -78,6 +107,8 @@ export const RegisterScreen = () => {
 
 
     return (
+        <div>
+            <Navbar />
         <div className="register-container">
             <div className="register-box">
                 <h3>Registro</h3>
@@ -85,7 +116,7 @@ export const RegisterScreen = () => {
                     <div className="form-group">
                         <input 
                                 type="text"
-                                className="form-control"
+                                className={`form-control ${!placaValid && 'is-invalid'}`}
                                 placeholder="Ingrese la placa..."
                                 name="placa"
                                 autoComplete="off" 
@@ -97,7 +128,7 @@ export const RegisterScreen = () => {
                     <div className="form-group">
                         <input 
                             type="text"
-                            className="form-control"
+                            className={`form-control ${!marcaValid && 'is-invalid'}`}
                             placeholder="marca modelo"
                             name="marca"
                             autoComplete="off" 
@@ -312,12 +343,13 @@ export const RegisterScreen = () => {
                         <input 
                             type="submit"
                             className="btnSubmit"
-                            value="Login" 
+                            value="Registrar" 
                         />
                     </div>
                 </form>
 
             </div>
         </div>
+    </div>
     )
 }
