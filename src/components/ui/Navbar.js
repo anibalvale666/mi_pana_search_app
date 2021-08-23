@@ -10,7 +10,6 @@ export const Navbar = () => {
         </Link>
 
 
-
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
                     <NavLink 

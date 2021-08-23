@@ -1,12 +1,13 @@
 import { combineReducers } from 'redux';
+import { authReducer } from './authReducer';
 import { dataAceiteReducer } from './dataAceiteReducer';
-import { uiReducer } from './uiReducer';
+
 
 
 
 export const rootReducer = combineReducers({
-    // ui: uiReducer,
-    data: dataAceiteReducer
+    data: dataAceiteReducer,
+    auth: authReducer
 })
 
 
