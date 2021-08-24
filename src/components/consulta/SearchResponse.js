@@ -6,6 +6,11 @@ export const SearchResponse = () => {
     const {searchData:{marca, aceite_motor, aceite_caja, filtros, liquido_radiador, obs}} = useSelector(state => state.data);
     
     // const {marca, aceite_motor, aceite_caja, filtros, liquido_radiador, obs} = searchData;    
+
+    const aceite_motor_fecha = new Date(aceite_motor.fecha);
+    const aceite_caja_fecha = new Date(aceite_caja.fecha);
+    const liquido_radiador_fecha = new Date(aceite_motor.fecha);
+    
     return (
         <div>
             <div className="search-response-box box">
@@ -24,14 +29,14 @@ export const SearchResponse = () => {
                         <tr>
                             <td>{aceite_motor.aceite}</td>
 
-                            <td>{aceite_motor.fecha.toLocaleDateString("en-US")}</td>
+                            <td>{aceite_motor_fecha.toLocaleDateString("en-US")}</td>
                             <td>{aceite_motor.km}</td>
                         </tr>
                         <tr>
 
                             <td>{aceite_caja.aceite}</td>
 
-                            <td>{aceite_caja.fecha.toLocaleDateString("en-US")}</td>
+                            <td>{aceite_caja_fecha.toLocaleDateString("en-US")}</td>
                             <td>{aceite_caja.km}</td>
                         </tr>
 
@@ -72,7 +77,7 @@ export const SearchResponse = () => {
                     <tbody>
                         <tr>
                             <td>{liquido_radiador.liquido}</td>
-                            <td>{liquido_radiador.fecha.toLocaleDateString("en-US")}</td>
+                            <td>{liquido_radiador_fecha.toLocaleDateString("en-US")}</td>
                             <td>{liquido_radiador.km}</td>
     
                         </tr>

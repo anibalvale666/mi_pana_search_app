@@ -2,30 +2,30 @@ import { types } from "../types/types";
 
 const initialState = {
     searchData: {
-        placa: 'v2d-517',
-        marca: 'Toyota ist',
+        placa: '',
+        marca: '',
         aceite_motor: {
-            aceite: 'castrol 5w-30',
+            aceite: '',
             fecha: new Date(),
-            km: '130000'
+            km: ''
         },
         aceite_caja: {
-            aceite: 'motul 80w-90',
+            aceite: '',
             fecha: new Date(),
-            km: '85000'
+            km: ''
         },
         filtros:{
-            aceite: 'lf-3005',
-            aire: 'fa-323',
-            combustible: 'lg55',
+            aceite: '',
+            aire: '',
+            combustible: '',
             cabina: ''
         },
         liquido_radiador: {
-            liquido: 'vistonyverde',
+            liquido: '',
             fecha: new Date(),
-            km: '75000'
+            km: ''
         },
-        obs: 'el carro ok '
+        obs: ''
     }
 }
 
@@ -33,15 +33,20 @@ const initialState = {
 
 export const dataAceiteReducer = ( state= initialState, action) => {
     switch (action.type) {
-        case types.eventSetActive:
+        case types.dataAddNew:
+            return {
+                ...state,
+            }
+        case types.dataResult:
             return {
                 ...state,
                 searchData: action.payload
             }
-
-        case types.dataAddNew:
+        
+        case types.datainitialState:
             return {
                 ...state,
+                searchData: initialState.searchData
             }
 
         default:

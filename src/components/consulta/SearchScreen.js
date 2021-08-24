@@ -1,11 +1,17 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { SearchResponse } from './SearchResponse'
 import './search.css'
 import { Navbar } from '../ui/Navbar'
 import { useForm } from '../../hooks/useForm'
+import { dataStartResult } from '../../actions/data'
+import Swal from 'sweetalert2'
 
 export const SearchScreen = () => {
 
+    const trueSearch = useSelector(state => state.data.searchData.placa)
+
+    const dispatch = useDispatch()
     const [ formValues, handleInputchange ] = useForm( {
         placa: ''
     } );
@@ -14,7 +20,12 @@ export const SearchScreen = () => {
 
     const handleSubmitForm = (e) => { 
         e.preventDefault();
-        console.log(placa)
+
+        if(!placa.lenght ) {
+            return Swal.fire('Error', 'Ingrese la Placa', 'error');
+        }
+
+        dispatch(dataStartResult(placa));
     }
 
 
@@ -37,7 +48,7 @@ export const SearchScreen = () => {
 
                 <button
                     type="submit"
-                    className="btn btn-outline-primary"
+                    className="btn btn-outline-primary ml-2"
                 >
                     <i className="fas fa-search"></i>
                     <span> Buscar</span>
@@ -45,7 +56,9 @@ export const SearchScreen = () => {
                     </form>
                 </div>
 
-                <SearchResponse />
+                {
+                    (!!trueSearch) && (<SearchResponse />)
+                }
             </div>
         </div>
     )

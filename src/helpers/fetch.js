@@ -46,5 +46,6 @@ const fetchContoken = (endpoint, data, method='GET') => {
 
 export {
     fetchSintoken,
-    fetchContoken
+    fetchContoken,
+    
 }
