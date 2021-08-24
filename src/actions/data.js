@@ -11,7 +11,6 @@ export const dataStartResult = ( placa ) => {
             
             if( body.ok ) {
                 dispatch(dataResult(body.data));
-                console.log(body.data);
             } else {
                 Swal.fire('Error', body.msg, 'error');
                 dispatch(badResult());

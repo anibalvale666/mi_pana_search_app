@@ -20,8 +20,8 @@ export const SearchScreen = () => {
 
     const handleSubmitForm = (e) => { 
         e.preventDefault();
-
-        if(!placa.lenght ) {
+        console.log(!!placa);
+        if( placa === '' ) {
             return Swal.fire('Error', 'Ingrese la Placa', 'error');
         }
 
