@@ -11,6 +11,7 @@ export const LoginScreen = () => {
         password: ''
     } );
 
+
     const { nick, password } = formValues;
     
     const handleSubmit = (e) => {
@@ -51,7 +52,6 @@ export const LoginScreen = () => {
                                 type="submit"
                                 className="btnSubmit"
                                 value="Login" 
-                                
                             />
                         </div>
                     </form>

@@ -6,12 +6,12 @@ const initialState = {
         marca: '',
         aceite_motor: {
             aceite: '',
-            fecha: new Date(),
+            fecha: '',
             km: ''
         },
         aceite_caja: {
             aceite: '',
-            fecha: new Date(),
+            fecha: '',
             km: ''
         },
         filtros:{
@@ -22,10 +22,11 @@ const initialState = {
         },
         liquido_radiador: {
             liquido: '',
-            fecha: new Date(),
+            fecha: '',
             km: ''
         },
-        obs: ''
+        obs: '',
+        id: ''
     }
 }
 
@@ -38,6 +39,11 @@ export const dataAceiteReducer = ( state= initialState, action) => {
                 ...state,
             }
         case types.dataResult:
+            return {
+                ...state,
+                searchData: action.payload
+            }
+        case types.dataUpdated:
             return {
                 ...state,
                 searchData: action.payload

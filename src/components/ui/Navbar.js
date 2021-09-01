@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { startLogout } from '../../actions/auth';
+import { badResult } from '../../actions/data';
 
 export const Navbar = () => {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ export const Navbar = () => {
     
     const handleLogout = () => {
         dispatch(startLogout());
+        dispatch(badResult());
     }
     
     return (

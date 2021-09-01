@@ -9,13 +9,14 @@ export const SearchResponse = () => {
 
     const aceite_motor_fecha = new Date(aceite_motor.fecha);
     const aceite_caja_fecha = new Date(aceite_caja.fecha);
-    const liquido_radiador_fecha = new Date(aceite_motor.fecha);
+    const liquido_radiador_fecha = new Date(liquido_radiador.fecha);
+
     
     return (
         <div>
             <div className="search-response-box box">
                 <h3> {marca} </h3>
-                <h4>Aceite:</h4>
+                <h4> Aceite:</h4>
                 <table className="table">
                     <thead>
                         <tr>
@@ -29,14 +30,27 @@ export const SearchResponse = () => {
                         <tr>
                             <td>{aceite_motor.aceite}</td>
 
-                            <td>{aceite_motor_fecha.toLocaleDateString("en-US")}</td>
+                            <td>
+                                {
+                                    (!!aceite_motor.fecha)
+                                    ?aceite_motor_fecha.toLocaleDateString("en-US")
+                                    : ''
+                                }
+                            
+                            </td>
                             <td>{aceite_motor.km}</td>
                         </tr>
                         <tr>
 
                             <td>{aceite_caja.aceite}</td>
 
-                            <td>{aceite_caja_fecha.toLocaleDateString("en-US")}</td>
+                            <td>
+                                {
+                                    (!!aceite_caja.fecha)
+                                    ? aceite_caja_fecha.toLocaleDateString("en-US")
+                                    : ''
+                                }
+                            </td>
                             <td>{aceite_caja.km}</td>
                         </tr>
 
@@ -77,7 +91,14 @@ export const SearchResponse = () => {
                     <tbody>
                         <tr>
                             <td>{liquido_radiador.liquido}</td>
-                            <td>{liquido_radiador_fecha.toLocaleDateString("en-US")}</td>
+                            <td>
+                                {
+                                    (!!liquido_radiador.fecha)
+                                    ? liquido_radiador_fecha.toLocaleDateString("en-US")
+                                    : ''
+                                
+                                }
+                            </td>
                             <td>{liquido_radiador.km}</td>
     
                         </tr>

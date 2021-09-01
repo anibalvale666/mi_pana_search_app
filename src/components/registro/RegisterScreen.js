@@ -1,78 +1,58 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import { useForm } from '../../hooks/useForm'
 import DatePicker from 'react-date-picker';
 import './register.css';
 import { Navbar } from '../ui/Navbar';
-import { useDispatch } from 'react-redux';
-import { dataAddNew } from '../../actions/data';
+import { useDispatch, useSelector } from 'react-redux';
+import { badResult, dataStartAddNew, dataStartResult, dataStartUpdate } from '../../actions/data';
+import Swal from 'sweetalert2';
 
 
 export const RegisterScreen = () => {
 
     const dispatch = useDispatch();
+    const {searchData} = useSelector(state => state.data);
+    const [ formValues, handleInputChange, setFormValues ] = useForm(searchData);
+    const {id, placa, marca, obs, aceite_motor, aceite_caja, filtros, liquido_radiador } = formValues;
 
-
-    const [fechaAceiteMotor, setFechaAceiteMotor] = useState(new Date());
-    const [fechaAceiteCaja, setFechaAceiteCaja] = useState(new Date());
-    const [fechaRefrigerante, setFechaRefrigerante] = useState(new Date());
+    const [fechaAceiteMotor, setFechaAceiteMotor] = useState('');
+    const [fechaAceiteCaja, setFechaAceiteCaja] = useState('');
+    const [fechaRefrigerante, setFechaRefrigerante] = useState('');
+    
+    const [disablePlaca, setDisablePlaca] = useState(false);
 
     const [placaValid, setPlacaValid] = useState(true);
     const [marcaValid, setMarcaValid] = useState(true);
 
+
     
-    const [ formValues, handleInputChange ] = useForm( {
-        placa: '',
-        marca: '',
-        aceite_motor: {
-            aceite: '',
-            fecha: new Date(),
-            km: ''
-        },
-        aceite_caja: {
-            aceite: '',
-            fecha: new Date(),
-            km: ''
-        },
-        filtros:{
-            aceite: '',
-            aire: '',
-            combustible: '',
-            cabina: ''
-        },
-        liquido_radiador: {
-            liquido: '',
-            fecha: new Date(),
-            km: ''
-        },
-        obs: ''
-    } ); 
-
-    const {placa, marca, obs, aceite_motor, aceite_caja, filtros, liquido_radiador } = formValues;
-
+    useEffect(() => {
+        setFormValues( searchData );
+    }, [searchData])
+    
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(formValues);
-
         if(placa.trim().length !== 6)
         {
-            return setPlacaValid(false);
+            setPlacaValid(false);
+            return Swal.fire('Error', 'La placa debe contener 6 digitos', 'error');
         }
         setPlacaValid(true);
         
         if(marca.trim().length === 0)
         {
-            return setMarcaValid(false);
+            setMarcaValid(false);
+            return Swal.fire('Error', 'el campo marca no debe estar vacio', 'error');
         }
         setMarcaValid(true);
+        if(id === '') {
+            dispatch(dataStartAddNew( formValues ));
+        } else {
+            dispatch(dataStartUpdate( formValues ));
+        }
 
-        dispatch(dataAddNew({
-            ...formValues,
-            id: new Date().getTime()
-        }))
-
-
-
+        
     } 
 
     const handleInputDateAceiteMotor = (e) => {
@@ -106,24 +86,39 @@ export const RegisterScreen = () => {
     }
 
 
+    const  handleSearch = (e) => {
+        e.preventDefault();
+        setDisablePlaca(true);
+        dispatch(dataStartResult(placa));
+    }
+
+    const  handleReset = (e) => {
+        e.preventDefault();
+        setDisablePlaca(false);
+        dispatch(badResult());
+    }
+
     return (
         <div>
             <Navbar />
         <div className="register-container">
             <div className="register-box">
-                <h3>Registro</h3>
+                <h3>Registro & Actualización</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <input 
                                 type="text"
-                                className={`form-control ${!placaValid && 'is-invalid'}`}
+                                className={` text ${!placaValid && 'is-invalid'}`}
                                 placeholder="Ingrese la placa..."
                                 name="placa"
                                 autoComplete="off" 
                                 maxLength="6"
                                 value={placa}
                                 onChange={handleInputChange}        
-                            />
+                                disabled={disablePlaca &&'disabled'}
+                            /> 
+                            <button className="btn btn-primary ml-2" onClick={handleSearch}>Buscar</button>
+                            <button className="btn btn-primary ml-2" onClick={handleReset}>Reset</button>
                     </div>
                     <div className="form-group">
                         <input 
@@ -134,6 +129,7 @@ export const RegisterScreen = () => {
                             autoComplete="off" 
                             value={marca}
                             onChange={handleInputChange}  
+                            disabled={!disablePlaca &&'disabled'}
                         />
                     </div>
 
@@ -153,6 +149,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={aceite_motor.aceite}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -162,6 +159,7 @@ export const RegisterScreen = () => {
                                         onChange={handleInputDateAceiteMotor}
                                         value={fechaAceiteMotor}
                                         className="form-control"
+                                        disabled={!disablePlaca}
                                     />
                             </div>
                         </div>
@@ -175,6 +173,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={aceite_motor.km}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -197,7 +196,8 @@ export const RegisterScreen = () => {
                                     name="aceite_caja.aceite"
                                     autoComplete="off" 
                                     value={aceite_caja.aceite}
-                                    onChange={handleInputChange}  
+                                    onChange={handleInputChange} 
+                                    disabled={!disablePlaca &&'disabled'} 
                                     />
                             </div>
                         </div>
@@ -207,6 +207,7 @@ export const RegisterScreen = () => {
                                             onChange={handleInputDateAceiteCaja}
                                             value={fechaAceiteCaja}
                                             className="form-control"
+                                            disabled={!disablePlaca}
                                         />
                             </div>
                         </div>
@@ -220,6 +221,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={aceite_caja.km}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -240,6 +242,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={filtros.aceite}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -253,6 +256,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={filtros.aire}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -266,6 +270,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={filtros.combustible}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -279,6 +284,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={filtros.cabina}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -300,6 +306,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={liquido_radiador.liquido}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     
                                     />
                             </div>
@@ -310,6 +317,7 @@ export const RegisterScreen = () => {
                                             onChange={handleInputDateRefrigerante}
                                             value={fechaRefrigerante}
                                             className="form-control"
+                                            disabled={!disablePlaca}
                                         />
                                 </div>
                         </div>
@@ -323,6 +331,7 @@ export const RegisterScreen = () => {
                                     autoComplete="off" 
                                     value={liquido_radiador.km}
                                     onChange={handleInputChange}  
+                                    disabled={!disablePlaca &&'disabled'}
                                     />
                             </div>
                         </div>
@@ -337,13 +346,15 @@ export const RegisterScreen = () => {
                             autoComplete="off" 
                             value={obs}
                             onChange={handleInputChange}  
+                            disabled={!disablePlaca &&'disabled'}
                         />
 
                     <div className="form-group">
                         <input 
                             type="submit"
                             className="btnSubmit"
-                            value="Registrar" 
+                            value="Guardar" 
+                            disabled={!disablePlaca &&'disabled'}
                         />
                     </div>
                 </form>

@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 
 export const SearchScreen = () => {
 
-    const trueSearch = useSelector(state => state.data.searchData.placa)
+    const trueSearch = useSelector(state => state.data.searchData.placa);
 
     const dispatch = useDispatch()
     const [ formValues, handleInputchange ] = useForm( {
@@ -20,7 +20,6 @@ export const SearchScreen = () => {
 
     const handleSubmitForm = (e) => { 
         e.preventDefault();
-        console.log(!!placa);
         if( placa === '' ) {
             return Swal.fire('Error', 'Ingrese la Placa', 'error');
         }

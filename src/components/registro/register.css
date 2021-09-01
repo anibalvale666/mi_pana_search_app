@@ -31,3 +31,10 @@
 .react-date-picker__wrapper {
     border: 0px solid gray !important;
 }
+
+/*input text*/
+
+.text {
+    border: 2px solid #ccc;
+
+}

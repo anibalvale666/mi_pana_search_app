@@ -5,9 +5,11 @@ export const useForm = (initialState = {}) => {
   const reset = () => {
     setValues(initialState);
   };
+  const setFormValues = ({state}) => {
+    setValues(state);
+  };
 
   const handleInputChange = ({ target }) => {
-
     const [section, key] = target.name.split(".");
 
     // section is : company
@@ -32,5 +34,6 @@ export const useForm = (initialState = {}) => {
 
   };
 
-  return [values, handleInputChange, reset];
+
+  return [values, handleInputChange, reset, setFormValues];
 };
