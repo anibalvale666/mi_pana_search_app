@@ -28,6 +28,7 @@ export const RegisterScreen = () => {
     
     useEffect(() => {
         setFormValues( searchData );
+        // eslint-disable-next-line
     }, [searchData])
     
 
@@ -96,6 +97,11 @@ export const RegisterScreen = () => {
         e.preventDefault();
         setDisablePlaca(false);
         dispatch(badResult());
+
+        
+        setFechaAceiteMotor('');
+        setFechaAceiteCaja('');
+        setFechaRefrigerante('');
     }
 
     return (

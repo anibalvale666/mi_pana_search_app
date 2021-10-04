@@ -9,6 +9,8 @@ import { startChecking } from '../actions/auth';
 import { LoginScreen } from '../components/auth/LoginScreen';
 
 import { SearchScreen } from '../components/consulta/SearchScreen';
+import { debtsScreen } from '../components/debts/debtsScreen';
+import { FilterWishListScreen } from '../components/filterwishlist/FilterWishListScreen';
 import { RegisterScreen } from '../components/registro/RegisterScreen';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -17,7 +19,7 @@ import { PublicRoute } from './PublicRoute';
 export const AppRouter = () => {
 
     const {nick} = useSelector(state => state.auth);
-
+    
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -48,6 +50,18 @@ export const AppRouter = () => {
                         exact 
                         path="/register" 
                         component={RegisterScreen} 
+                        isAuthenticated={!!nick}
+                    />
+                    <PrivateRoute
+                        exact 
+                        path="/filterwishlist" 
+                        component={FilterWishListScreen} 
+                        isAuthenticated={!!nick}
+                    />
+                    <PrivateRoute
+                        exact 
+                        path="/debts" 
+                        component={debtsScreen} 
                         isAuthenticated={!!nick}
                     />
                     <Redirect to="/" />

@@ -11,7 +11,7 @@ export const useForm = (initialState = {}) => {
 
   const handleInputChange = ({ target }) => {
     const [section, key] = target.name.split(".");
-
+    
     // section is : company
     // key is : position
 

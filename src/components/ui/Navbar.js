@@ -19,18 +19,44 @@ export const Navbar = () => {
         <Link className="navbar-brand" to="/">
             MiPana
         </Link>
+        <div className="navbar-collapse">
+            {
+                (!!nick) &&
+                <div className="navbar-nav">
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/filterwishlist"
+                    >
+                        Lista deseo filtros
+                    </NavLink>
+
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/debts"
+                    >
+                        Cuentas y Saldos
+                    </NavLink>
+                </div>
+            }
+        </div>
 
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul className="navbar-nav ml-auto">
                     {
                         (!!nick)
                         ?
-                            (<button 
-                                className="btn btn-outline-danger" 
-                                onClick={handleLogout}
-                            >
-                                Logout
-                            </button>)  
+                            (       
+                                <button 
+                                    className="btn btn-outline-danger" 
+                                    onClick={handleLogout}
+                                >
+                                    Logout
+                                </button>
+                            )  
                         : 
  
                             (<NavLink 

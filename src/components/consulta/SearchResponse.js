@@ -33,7 +33,7 @@ export const SearchResponse = () => {
                             <td>
                                 {
                                     (!!aceite_motor.fecha)
-                                    ?aceite_motor_fecha.toLocaleDateString("en-US")
+                                    ?aceite_motor_fecha.toLocaleDateString("es-ES")
                                     : ''
                                 }
                             
@@ -47,7 +47,7 @@ export const SearchResponse = () => {
                             <td>
                                 {
                                     (!!aceite_caja.fecha)
-                                    ? aceite_caja_fecha.toLocaleDateString("en-US")
+                                    ? aceite_caja_fecha.toLocaleDateString("es-ES")
                                     : ''
                                 }
                             </td>
@@ -94,7 +94,7 @@ export const SearchResponse = () => {
                             <td>
                                 {
                                     (!!liquido_radiador.fecha)
-                                    ? liquido_radiador_fecha.toLocaleDateString("en-US")
+                                    ? liquido_radiador_fecha.toLocaleDateString("es-ES")
                                     : ''
                                 
                                 }
