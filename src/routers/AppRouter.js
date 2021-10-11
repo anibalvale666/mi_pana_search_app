@@ -6,10 +6,10 @@ import {
     Redirect,
   } from "react-router-dom";
 import { startChecking } from '../actions/auth';
+import { AccountScreen } from '../components/account/AccountScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
 
 import { SearchScreen } from '../components/consulta/SearchScreen';
-import { debtsScreen } from '../components/debts/debtsScreen';
 import { FilterWishListScreen } from '../components/filterwishlist/FilterWishListScreen';
 import { RegisterScreen } from '../components/registro/RegisterScreen';
 import { PrivateRoute } from './PrivateRoute';
@@ -60,8 +60,8 @@ export const AppRouter = () => {
                     />
                     <PrivateRoute
                         exact 
-                        path="/debts" 
-                        component={debtsScreen} 
+                        path="/account" 
+                        component={AccountScreen} 
                         isAuthenticated={!!nick}
                     />
                     <Redirect to="/" />

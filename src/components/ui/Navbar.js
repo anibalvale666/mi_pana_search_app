@@ -36,7 +36,7 @@ export const Navbar = () => {
                         activeClassName="active"
                         className="nav-item nav-link" 
                         exact
-                        to="/debts"
+                        to="/account"
                     >
                         Cuentas y Saldos
                     </NavLink>

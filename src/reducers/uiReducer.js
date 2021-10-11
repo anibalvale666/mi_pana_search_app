@@ -2,6 +2,8 @@ import { types } from "../types/types";
 
 const initialState = {
     OpenFilterModal: false,
+    OpenAccountModal: false,
+    OpenAccountRecordModal: false,
 }
 
 
@@ -19,6 +21,29 @@ export const uiReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 OpenFilterModal: false
+            }
+        case types.uiOpenAccountModal:
+            return {
+                ...state,
+                OpenAccountModal: true
+            }
+
+        case types.uiCloseAccountModal:
+            return {
+                ...state,
+                OpenAccountModal: false
+            }   
+
+        case types.uiOpenAccountRecordModal:
+            return {
+                ...state,
+                OpenAccountRecordModal: true
+            }
+
+        case types.uiCloseAccountRecordModal:
+            return {
+                ...state,
+                OpenAccountRecordModal: false
             }
     
         default:

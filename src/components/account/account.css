@@ -1,0 +1,36 @@
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.account-container {
+    padding: 5%;
+    padding-top: 1%;
+}
+
+.account-search-box {
+
+    text-align: center;
+    margin: 0px auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    padding: 5%;
+    margin-bottom: 50px;
+}
+
+h4 {
+    margin-top: 10px;
+    margin-left: 5%;
+    font-weight: bold
+    /* padding: 15px; */
+
+}
+
+.account-response-box {
+    margin-top: 50px;
+}
+
+ul {
+    list-style:none;
+}

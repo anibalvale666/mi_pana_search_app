@@ -6,7 +6,8 @@ import Modal from "react-modal";
 import Select from "react-select";
 import { useForm } from "../../hooks/useForm";
 import Swal from "sweetalert2";
-import { filterClearSetActive, filterStartAddNew, filterStartUpdate, uiCloseFilterModal } from "../../actions/filter";
+import { filterClearSetActive, filterStartAddNew, filterStartUpdate } from "../../actions/filter";
+import { uiCloseFilterModal } from "../../actions/ui";
 
 
 const customStyles = {
@@ -88,13 +89,15 @@ export const FilterModal = () => {
 
   const closeModal = () => {
     // TODO: cerrar el modal
-    dispatch( uiCloseFilterModal() );
-    // dispatch( eventClearActiveEvent() );
-    setFormValues( initFilter );
+     dispatch( uiCloseFilterModal() );
+     setTimeout(function() {
+       if ( !!filterActive ) {
+         dispatch(filterClearSetActive());
+       }
+   
+       setFormValues( initFilter );
 
-    if ( !!filterActive ) {
-      dispatch(filterClearSetActive());
-    }
+    }, 300);
   }
 
   // handle click event of the Remove button
@@ -199,8 +202,8 @@ export const FilterModal = () => {
           {
             application.map((x, i) => {
               return(
-                <div className="row g-3 mb-1">
-                    <div className="col-auto">
+                <div className="row g-3 mb-1"key={i}>
+                    <div className="col-auto" >
                         <input
                             autoComplete="off"
                             name="value"

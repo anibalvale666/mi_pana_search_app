@@ -16,6 +16,7 @@ export const LoginScreen = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+
         dispatch(startLogin(nick,password));
     }
 

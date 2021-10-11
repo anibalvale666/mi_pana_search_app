@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-date-picker";
 import { Navbar } from "../ui/Navbar";
 import "./filterwishlist.css";
-import { changeFilterSearchDate, filterSetActive, filterStartDelete, filterStartResult, uiOpenFilterModal } from "../../actions/filter";
+import { changeFilterSearchDate, filterSetActive, filterStartDelete, filterStartResult } from "../../actions/filter";
 import { FilterModal } from "./FilterModal";
+import { uiOpenFilterModal } from "../../actions/ui";
 
 
 export const FilterWishListScreen = () => {
@@ -49,16 +50,16 @@ export const FilterWishListScreen = () => {
       <div className="filter-container">
         <div className="filter-search-box">
           <DatePicker onChange={handleDateChange} value={searchDate} />
-        <button className="btn btn-primary ml-2" onClick={handleOpenModal}>
-            Nuevo Filtro
-        </button>
+          <button className="btn btn-primary ml-2" onClick={handleOpenModal}>
+              Nuevo Filtro
+          </button>
         </div>
 
 
         <div className="filter-response-box">
-          <table className="table">
-            <thead>
-              <tr>
+          <table className="table table-bordered" >
+            <thead >
+              <tr >
                 <th scope="col">Fecha</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Marca</th>
@@ -66,20 +67,21 @@ export const FilterWishListScreen = () => {
                 <th scope="col">Aplicación</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody >
               {filterList.map((filter) => {
                 const filterDate = new Date(filter.date);
                 return (
-                  <tr>
+                  <tr key={filter.id}>
                     <td>{filterDate.toLocaleDateString("es-ES")}</td>
                     <td> {filter.filterType} </td>
                     <td> {filter.brand} </td>
                     <td> {filter.code} </td>
                     <td>
                       <ul>
-                        {filter.application.map((item) => (
-                          <li key={item._id} >{item.value}</li>
-                        ))}
+                        {filter.application.map((item) => {
+                          return (
+                          <li key={item._id} >{item.value}</li>)
+                        })}
                       </ul>
                     </td>
                     <td>

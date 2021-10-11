@@ -11,9 +11,9 @@ export const filterStartAddNew = ( filter ) => {
             const body = await resp.json();
 
             if(body.ok) {
-                dispatch(filtertAddNew(filter));
+                dispatch(filtertAddNew(body.filter));
                 Swal.fire('Guardado','Guardado con éxito', 'success');
-                dispatch(filterStartResult(filter.date));
+                // dispatch(filterStartResult(filter.date));
             }
         } catch (error) {
             console.log(error)
@@ -35,7 +35,7 @@ export const filterStartUpdate = ( filter ) => {
             const body = await resp.json()
 
             if ( body.ok ) {
-                dispatch( filterUpdated( filter ) );
+                dispatch( filterUpdated( body.filter ) );
                 Swal.fire('Actualizado','Actualizado con éxito', 'success');
             } else {
                 Swal.fire('Error', body.msg, 'error');
@@ -61,7 +61,7 @@ export const filterStartResult = (date) => {
             const resp = await fetchContoken( 'filterswishlist',{date},'POST' );
             const body = await resp.json();
             if(body.ok) {
-                dispatch( FilterResultLoaded( body.filtros ) );
+                dispatch( FilterResultLoaded( body.filters ) );
             } else {
                 dispatch( FilterNotResultLoaded() );
             }
@@ -114,9 +114,6 @@ const filterDeleted = (id) => ({
     payload:  id
 })
 
-
-export const uiOpenFilterModal = () => ({ type: types.uiOpenFilterModal });
-export const uiCloseFilterModal = () => ({ type: types.uiCloseFilterModal });
 
 
 export const changeFilterSearchDate = (date) => ({
