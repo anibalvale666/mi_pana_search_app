@@ -4,7 +4,8 @@ import { types } from "../types/types";
 const initialState = {
     accountList: [],
     accountActive: null,
-    accountSearchBrand: 'CASTROL'
+    accountSearchBrand: 'CASTROL',
+    accountListNotPaid: []
 }
 
 export const accountReducer = (state = initialState, action) => {
@@ -62,6 +63,18 @@ export const accountReducer = (state = initialState, action) => {
             return {
                 ...state,
                 accountSearchBrand: action.payload
+            }
+
+        case types.accountListNotPaid:
+            return {
+                ...state,
+                accountListNotPaid: [ ...action.payload ]
+            }
+
+        case types.accountclearListNotPaid:
+            return {
+                ...state,
+                accountListNotPaid: []
             }
         
         default:

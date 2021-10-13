@@ -6,6 +6,33 @@ import { fetchContoken } from "../helpers/fetch";
 import { types } from "../types/types"
 
 
+//trae todas las cuentas activas
+export const getNotPaidAccounts = () => {
+    return  async(dispatch) => {
+        try {
+            const resp = await fetchContoken( 'account/notpaidaccounts',{},'POST' );
+            const body = await resp.json();
+            
+
+            dispatch( notPaidAccountsLoaded( body.accounts ) );
+ 
+        } catch ( error ) {
+            console.log(error)
+        }
+    }
+};
+
+const notPaidAccountsLoaded = (accounts) => ({
+    type: types.accountListNotPaid,
+    payload: accounts
+});
+
+const clearNotPaidAccounts = () =>({
+    type: types.accountclearListNotPaid,
+});
+
+
+
 // crear una nueva cuenta
 export const accountStartAddNew = ( account ) => {
     return async(dispatch) => {

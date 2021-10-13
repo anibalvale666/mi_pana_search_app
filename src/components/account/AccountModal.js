@@ -32,41 +32,40 @@ export const AccountModal = () => {
   
   const { OpenAccountModal } = useSelector((state) => state.ui);
   const {companyActive} = useSelector( state => state.company );
-  const { accountActive, accountSearchBrand } = useSelector((state) => state.account);
-
+  const { accountActive } = useSelector((state) => state.account);
+  
   const initAccount = {
     initial_date: new Date(),
     invoice_number: "",
-    brand: accountSearchBrand,
+    brand: companyActive.brand,
     total_amount: "",
     currency: companyActive.currency,
     record: [],
   };
 
+ 
   const [accountInitialDate, setAccountInitialDate] = useState(
     !!accountActive ? accountActive.initial_date : new Date()
   );
 
   const [formValues, handleInputChange, setFormValues] = useForm(
     !!accountActive ? accountActive : initAccount
-  );
+    );
+    
+    const { initial_date, invoice_number, brand, total_amount, record, currency } = formValues;
 
-  const { initial_date, invoice_number, brand, total_amount, record } = formValues;
     
   useEffect(() => {
-    handleInputChange({
-      target: {
-        name: "brand",
-        value: accountSearchBrand,
-      },
+
+    setFormValues({
+      initial_date: new Date(),
+      invoice_number: "",
+      brand: companyActive.brand,
+      total_amount: "",
+      currency:   companyActive.currency,
+      record: [{ date: new Date(), amount: "" }],
     });
-    handleInputChange({
-      target: {
-        name: "currency",
-        value: companyActive.currency,
-      },
-    });
-  }, [accountSearchBrand]);
+  }, [companyActive]);
 
   useEffect(() => {
     if ( accountActive ) {
@@ -108,7 +107,7 @@ export const AccountModal = () => {
         name: "record",
         value: list,
       },
-    });
+    }); 
   };
 
   const closeModal = () => {
@@ -118,7 +117,7 @@ export const AccountModal = () => {
     setFormValues({
       initial_date: new Date(),
       invoice_number: "",
-      brand: accountSearchBrand,
+      brand: companyActive.brand,
       total_amount: "",
       record: [{ date: new Date(), amount: "" }],
     });
@@ -160,7 +159,7 @@ export const AccountModal = () => {
       dispatch(accountStartAddNew(formValues));
     
     }
-
+    // console.log(formValues);
     closeModal();
   };
 
@@ -174,6 +173,8 @@ export const AccountModal = () => {
       // overlayClassName="modal-fondo"
     >
       <h1> {accountActive ? "Editar Cuenta" : "Nuevo Registro"} </h1>
+      <h4> {brand} </h4>
+      <h4> {currency} </h4>
       <hr />
       <form className="container" onSubmit={handleSubmitForm}>
         <div className="form-group">

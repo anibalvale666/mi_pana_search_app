@@ -37,6 +37,8 @@ export const types = {
     accountDeleted: '[account] Account Deleted',
     accountLoaded: '[account] Account List Loaded',
     accountNotResult: '[account] Account List Not Result',
+    accountListNotPaid: '[account] Account List Not Paid', 
+    accountclearListNotPaid: '[account] Account Clear List Not Paid',
 
     companyAddNew: '[company] Add new company',
     companyUpdated: '[company] Company Updated',
