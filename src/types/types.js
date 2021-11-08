@@ -48,6 +48,9 @@ export const types = {
     companySetActive: '[company] Set Active',
     companyClearActiveCompany: '[company] Clear active Company',
 
+    itemGetListByBrand: '[item] Get List Item By Brand',
+    itemEmptyList: '[item] Get Empty List',
+    changeItemBrand: '[item] Change Item Search Brand',
 
     authCheckingFinish: '[auth] FinishChecking login State',
     authStartlogin: '[auth] Start login',

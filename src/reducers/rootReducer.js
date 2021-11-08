@@ -4,6 +4,7 @@ import { authReducer } from './authReducer';
 import { companyReducer } from './companyReducer';
 import { dataAceiteReducer } from './dataAceiteReducer';
 import { filterReducer } from './filterReducer';
+import { itemReducer } from './itemReducer';
 import { uiReducer } from './uiReducer';
 
 
@@ -16,6 +17,7 @@ export const rootReducer = combineReducers({
     ui: uiReducer,
     account: accountReducer,
     company: companyReducer,
+    item: itemReducer,
 })
 
 

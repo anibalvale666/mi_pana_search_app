@@ -19,6 +19,7 @@ export const Navbar = () => {
         <Link className="navbar-brand" to="/">
             MiPana
         </Link>
+
         <div className="navbar-collapse">
             {
                 (!!nick) &&
@@ -40,11 +41,19 @@ export const Navbar = () => {
                     >
                         Cuentas y Saldos
                     </NavLink>
+                    <NavLink 
+                        activeClassName="active"
+                        className="nav-item nav-link" 
+                        exact
+                        to="/prices"
+                    >
+                        Precios
+                    </NavLink>
                 </div>
             }
         </div>
-
-        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        {/* collapse w-100 order-3 dual-collapse2 */}
+        <div className="navbar-collapse ">
                 <ul className="navbar-nav ml-auto">
                     {
                         (!!nick)

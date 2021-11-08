@@ -37,6 +37,7 @@ export const AccountRecordModal = () => {
     const dispatch = useDispatch();
     const closeModal = () => {
         dispatch(uiCloseAccountRecordModal());
+        dispatch(accountClearSetActive());
     }
 
     const handleSubmitForm = (e) => {   

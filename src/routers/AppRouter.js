@@ -11,6 +11,7 @@ import { LoginScreen } from '../components/auth/LoginScreen';
 
 import { SearchScreen } from '../components/consulta/SearchScreen';
 import { FilterWishListScreen } from '../components/filterwishlist/FilterWishListScreen';
+import { PricesScreen } from '../components/prices/PricesScreen';
 import { RegisterScreen } from '../components/registro/RegisterScreen';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
@@ -62,6 +63,12 @@ export const AppRouter = () => {
                         exact 
                         path="/account" 
                         component={AccountScreen} 
+                        isAuthenticated={!!nick}
+                    />
+                    <PrivateRoute
+                        exact 
+                        path="/prices" 
+                        component={PricesScreen} 
                         isAuthenticated={!!nick}
                     />
                     <Redirect to="/" />
